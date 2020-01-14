@@ -1,0 +1,311 @@
+*{
+    list-style: none;
+    box-sizing: border-box;
+}
+html, body{
+    padding: 10px 0px 0px 2px;
+    margin: 0;
+
+    font-family: sans-serif;
+
+}
+
+/* navigation */
+
+nav{
+    background-color: slategrey;
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    color:white;
+    font-size: 30px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+nav ul{
+    float: right;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+a.active, a:hover{
+    background: #1b9bff;
+    transition: 0.5s;
+}
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+#check{
+    display: none;
+}
+@media (max-width:952px){
+    label.logo{
+        font-size: 30px;
+        padding-left: 50px;
+    }
+
+    nav ul li a{
+        font-size: 16px;
+    }
+}
+@media (max-width:858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    a:hover, a.active{
+        background: none;
+        color: #0082e6;
+    }
+    #check:checked ~ul{
+        left: 0;
+    }
+}
+section{
+    background: url("../images/img1.jpg") no-repeat;
+    background-size: cover;
+    height: calc(100vh - 80px);
+}
+
+/*-------*/
+.galleryContainer{
+    width:100%;
+    height: 600px;
+    max-width: 1000px;
+    user-select: none;
+    box-shadow: 0px 0px 3px 1px #00000078;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.galleryContainer .slideshowContainer{
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
+    background-color: gainsboro;
+    position: relative;
+}
+.galleryContainer .slideshowContainer .imageHolder{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+}
+.galleryContainer .slideshowContainer .imageHolder img{
+    width: 100%;
+    height: 100%;
+}
+.galleryContainer .slideshowContainer .imageHolder .captionText{
+    display: none;
+}
+.galleryContainer .slideshowContainer .leftArrow, .galleryContainer .slideshowContainer .rightArrow{
+    width: 50px;
+    background-color: #00000036;
+    position: absolute;
+    left:0;
+    z-index: 1;
+    transition: background 0.5s;
+    height: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.galleryContainer .slideshowContainer .rightArrow{
+    left:auto;
+    right:0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.galleryContainer .slideshowContainer .leftArrow:hover, .galleryContainer .slideshowContainer .rightArrow:hover{
+    background: #000000a8;
+    cursor: pointer;
+}
+.galleryContainer .slideshowContainer .arrow{
+    display: inline-block;
+    border: 3px solid white;
+    width: 10px;
+    height: 10px;
+    border-left:none;
+    border-bottom: none;
+    margin: auto;
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+.galleryContainer .slideshowContainer .arrow.arrowLeft{
+    transform: rotateZ(-135deg);
+}
+.galleryContainer .slideshowContainer .arrow.arrowRight{
+    transform: rotateZ(45deg);
+}
+.galleryContainer .slideshowContainer .captionHolder{
+    position: absolute;
+    bottom: 0;
+    z-index:1;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    background: #00000047;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+}
+.galleryContainer .slideshowContainer .captionHolder .captionText{
+    margin: 0;
+}
+.galleryContainer #dotsContainer{
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+.galleryContainer #dotsContainer .dots{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 10px;
+    background-color: #bbb;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.galleryContainer #dotsContainer .dots:hover, .galleryContainer #dotsContainer .dots.active{
+    background-color: #717171;
+}
+.galleryContainer .moveLeftCurrentSlide{
+    animation-name: moveLeftNext;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.galleryContainer .moveLeftNextSlide{
+    animation-name: moveLeftNext;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes moveLeftCurrent {
+    from{
+        margin-left:0;
+        opacity: 1;
+    }
+    to{
+        margin-left: -100%;
+        opacity: 1;
+    }
+}
+@keyframes moveLeftNext {
+    from{
+        margin-left:100%;
+        opacity: 1;
+    }
+    to{
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+.galleryContainer .moveRightCurrentSlide{
+    animation-name: moveRightCurrent;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes moveRightCurrent {
+    from{
+        margin-left:0;
+        opacity: 1;
+    }
+    to{
+        margin-left: 100%;
+        opacity: 1;
+    }
+}
+.galleryContainer .moveRightNextSlide{
+    animation-name: moveRightNext;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes moveRightNext {
+    from{
+        margin-left:-100%;
+        opacity: 1;
+    }
+    to{
+        margin-left: 0;
+        opacity: 1;
+    }
+}
+.slideTextFromBottom{
+    animation-name: slideTextFromBottom;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+@keyframes slideTextFromBottom {
+    from{
+        opacity: 0;
+        margin-top: 100px;
+    }
+    to{
+        opacity: 0;
+        margin-top: 0;
+    }
+}
+.slideTextFromTop{
+    animation-name: slideTextFromTop;
+    animation-duration: 0.7s;
+    animation-timing-function: ease-out;
+}
+@keyframes slideTextFromTop {
+    from{
+        opacity: 0;
+        margin-top: -100px;
+    }
+    to{
+        opacity: 0;
+        margin-top: 0;
+    }
+}

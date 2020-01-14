@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pebble IT</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/blog.css">
+    <link rel="stylesheet" type="text/css" href="css/slide.css">
+    <link rel="stylesheet" type="text/css" href="css/contact.css">
+
+
+
+</head>
+<body>
+<div class="mainContainer">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">FED LOGO</label>
+        <ul>
+            <li><a href="index.html">Home</a> </li>
+            <li><a href="">Service</a> </li>
+            <li><a href="blogs.html">blogs</a> </li>
+            <li><a href="">about</a> </li>
+        </ul>
+    </nav>
+    <div id="contact_container">
+        <!---
+        THIS CONTAINS THE MAIN BODY OF WEBPAGE
+        -->
+            <div id="contact_us">
+                <form action="/action_page.php">
+                    Title of Blog:<br>
+                    <input type="text" name="title" value="" id="title">
+                    <br>
+                    Author:<br>
+                    <input type="text" name="auhor" value="" id="author">
+                    <br><br>
+                    Description:<br>
+                    <textarea type="text" name="description" value="" id="desc"></textarea>
+                    <br><br>
+                    <button value="Upload">Upload</button>
+                    <button id="btn" value="Submit">Post</button>
+                </form>
+            </div>
+        Datas
+        <div id="msg">
+            <pre></pre>
+        </div>
+        <div id="json1">json</div>
+        </div>
+    <div id="footers">footers</div>
+</div>
+<script>
+    let datas=[];
+    var ids = datas.length+1;
+    const addData = (ev)=>{
+        ev.preventDefault();
+        let data = {
+            id: ids.toString(),
+            date: Date.now(),
+            author: document.getElementById('author').value,
+            title: document.getElementById('title').value,
+            desc: document.getElementById('desc').value
+        }
+        datas.push(data);
+        document.forms[0].reset();
+        console.warn('added', {datas});
+        let pre = document.querySelector('#msg pre');
+        pre.textContent = '\n'+JSON.stringify(datas, '\t', 2);
+        // Creating a XHR object
+        let xhr = new XMLHttpRequest();
+        let url = 'https://cors-anywhere.herokuapp.com/https://j3jr2eir74.execute-api.us-east-1.amazonaws.com/dev/blog'; // url to api
+        //opening a connection
+        xhr.open("POST",url,true);
+
+        // Set the request header i.e. which type of content you are sending
+        xhr.setRequestHeader("Content-Type","application/json");
+
+        // Create a state change callback
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+
+                // Print received data from server
+                //appendData(data);
+                let pre = document.querySelector('#msg pre');
+                pre.textContent = '\n'+JSON.stringify(datas, '\t', 2);
+            }
+        };
+        console.log('sending json'+JSON.stringify(datas));
+        console.log('data arrays: '+JSON.stringify(datas));
+        console.log('single data: '+JSON.stringify(data));
+        xhr.send(JSON.stringify(data));
+        console.log('sent json'+JSON.stringify(datas));
+    }
+    var apiData = "https://cors-anywhere.herokuapp.com/https://j3jr2eir74.execute-api.us-east-1.amazonaws.com/dev/blog";
+    fetch(apiData)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            appendData(data);
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+
+    function appendData(data) {
+        var mainContainer = document.getElementById("json1");
+        for (var i = 0; i < data.Items.length; i++) {
+            console.log(i);
+            var div = document.createElement("div");
+            div.innerHTML = 'Details : ID is '+data.Items[i].id +' referred as '+data.Items[i].author;
+            mainContainer.appendChild(div);
+            console.log(data.Items[i].id +'  added.');
+        }
+        console.log('after loop');
+    }
+    function sendJSON(jsonData){
+        // Creating a XHR object
+        let xhr = new XMLHttpRequest();
+        let url = 'https://cors-anywhere.herokuapp.com/https://j3jr2eir74.execute-api.us-east-1.amazonaws.com/dev/blog'; // url to api
+
+        //opening a connection
+        xhr.open("POST",url,true);
+
+        // Set the request header i.e. which type of content you are sending
+        xhr.setRequestHeader("Content-Type","application/json");
+
+        // Create a state change callback
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+
+            }
+        };
+        console.log('sending json'+datas);
+        xhr.send(jsonData);
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+        document.getElementById('btn').addEventListener('click',addData);
+        sendJSON();
+    });
+
+
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>

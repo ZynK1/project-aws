@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/slide.css">
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+</head>
+<body>s
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">FED</label>
+        <ul>
+            <li><a href="#" class="active">Home</a> </li>
+            <li><a href="#">Home1</a> </li>
+            <li><a href="#">Home2</a> </li>
+            <li><a href="#">Home3</a> </li>
+        </ul>
+    </nav>
+    <div class="galleryContainer">
+        <div class="slideshowContainer">
+            <div class="leftArrow" onclick="plusSlide(-1)"><span class="arrow arrowLeft"></span></div>
+            <div class="rightArrow" onclick="plusSlide(1)"><span class="arrow arrowRight"></span></div>
+            <div class="captionHolder"><p class="captionText"></p></div>
+            <div class="imageHolder">
+                <img src="images/img1.jpg">
+                <p class="captionText">Caption text-01</p>
+            </div>
+            <div class="imageHolder">
+                <img src="images/img2.jpg">
+                <p class="captionText">Caption text-02</p>
+            </div>
+            <div class="imageHolder">
+                <img src="images/img3.jpg">
+                <p class="captionText">Caption text-03</p>
+            </div>
+            <div class="imageHolder">
+                <img src="images/img4.jpg">
+                <p class="captionText">Caption text-04</p>
+            </div>
+        </div>
+        <div id="dotsContainer"></div>
+    </div>
+    <section>
+
+    </section>
+
+    <script src="js/myScript.js"></script>
+</body>
+</html>
